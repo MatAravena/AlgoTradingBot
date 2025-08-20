@@ -1,0 +1,31 @@
+data:
+  timeframe: "1h"          # use "30m" or "1h" for stocks too
+  lookback_bars: 500
+symbols:
+  - symbol: ["BTC/USD", "ETH/USD", "SOL/USD", "XRP/USD"]
+    asset_class: "crypto"  # "equity" for stocks
+  - symbol: "AAPL"
+    asset_class: "equity"
+labels:
+  pt_mult: 2.0    # take-profit = +2σ
+  sl_mult: 1.0    # stop-loss    = -1σ
+  t1_bars: 24     # timeout in bars
+  vol_ewm_span: 48
+cv:
+  n_splits: 5
+  embargo_pct: 0.05
+model:
+  n_estimators: 400
+  max_depth: 6
+  min_samples_leaf: 3
+  class_weight: "balanced"
+trade:
+  proba_entry_threshold: 0.55
+  max_risk_per_trade: 0.005   # 0.5% of equity
+  max_daily_loss: 0.02        # 2% stop for the day
+  trailing_sigma: 1.2
+  tif: "gtc"
+alpaca:
+  key_id: "YOUR_KEY"
+  secret: "YOUR_SECRET"
+  paper: true

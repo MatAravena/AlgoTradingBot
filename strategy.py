@@ -7,10 +7,15 @@ from alpaca.data.requests import StockBarsRequest
 from alpaca.data.timeframe import TimeFrame
 from alpaca.trading.client import TradingClient
 from alpaca.trading.enums import OrderSide, TimeInForce, OrderClass
-from alpaca.stream import Stream
+# from alpaca.stream import Stream
 from ta.momentum import RSIIndicator
 from ta.trend import MACD, EMAIndicator
 from ta.volatility import BollingerBands, AverageTrueRange
+from config import (
+    RSI_PERIOD, MACD_FAST_EMA, MACD_SLOW_EMA, MACD_SIGNAL_EMA,
+    BIG_TREND_FAST_MA, BIG_TREND_SLOW_MA, MAX_RISK_PERCENT,
+    STOP_LOSS_PERCENT, TAKE_PROFIT_PERCENT, TIMEFRAME_MAIN, TIMEFRAME_TREND,
+    WINDOW_SIZE, UNDERLYING_SYMBOL, ATR_PERIOD, BB_LENGTH, BB_STDDEV, EMA_PERIOD)
 
 # === Logging Configuration ===
 logging.basicConfig(
@@ -26,7 +31,7 @@ api_secret = os.getenv("API_SECRET_VAR")
 paper_trading = os.getenv("PAPER_FLAG_VAR") == "True"
 base_url = os.getenv("TRADE_API_URL_VAR")
 
-symbol = "UNDERLYING_SYMBOL"
+symbol = UNDERLYING_SYMBOL
 rsi_period = RSI_PERIOD
 macd_fast = MACD_FAST_EMA
 macd_slow = MACD_SLOW_EMA
@@ -40,10 +45,10 @@ timeframe_main = TIMEFRAME_MAIN
 timeframe_trend = TIMEFRAME_TREND
 window_size = WINDOW_SIZE
 
-BB_LENGTH = 20
-BB_STDDEV = 2.0
-EMA_PERIOD = 20
-ATR_PERIOD = 14
+bb_length = BB_LENGTH
+bb_stddev = BB_STDDEV
+ema_period = EMA_PERIOD
+atr_period = ATR_PERIOD
 
 # === Clients ===
 trading_client = TradingClient(api_key, api_secret, paper=paper_trading, base_url=base_url)
@@ -104,7 +109,10 @@ account = trading_client.get_account()
 max_risk_amount = float(account.equity) * max_risk_pct
 logger.info(f"Account equity: {account.equity}, max risk per trade: {max_risk_amount}")
 
-stream = Stream(api_key, api_secret, base_url=base_url, data_stream="sip")
+# CryptoDataStream
+stream = CryptoDataStream(api_key, api_secret, base_url=base_url, data_stream="sip")
+stream = StockDataStream(api_key, api_secret, base_url=base_url, data_stream="sip")
+stream = OptionDataStream(api_key, api_secret, base_url=base_url, data_stream="sip")
 
 @stream.on_bar(symbol)
 async def on_bar(bar):

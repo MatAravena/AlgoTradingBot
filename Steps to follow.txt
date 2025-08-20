@@ -1,0 +1,47 @@
+Drop-in module plan (Python package layout)
+1) labels.py
+triple_barrier_labels(prices, pt_mult, sl_mult, t1_bars, vol_ewm_span)
+
+Upper/lower barriers = ±k·σ (use EWM vol); timeout t1_bars. Return {t1, label, barrier_hit}. machine-learning-for-as…
+
+trend_scan_labels(prices, lookforwards)
+
+Compute t-stat of linear trend for each horizon; pick max |t| sign (+1/-1) and store t-value for sample weights/regression. machine-learning-for-as…
+
+meta_labels(primary_labels, proba, threshold)
+
+1 = take/size trade when model proba ≥ threshold; 0 otherwise. machine-learning-for-as…
+
+2) features.py
+Price/vol features (returns, EWM vol, skew, kurtosis), MA/EMA crosses, MACD, Stoch, RS/relative strength. Keep the set compact first.
+
+3) sampling.py
+get_event_times_from_labels(labels) with embargo window.
+
+purged_kfold(n_splits, embargo_pct) and CPCV splitter for overlapping events. machine-learning-for-as…
+
+4) importance.py
+mdi_importance(model, X, y) (tree ensemble).
+
+mda_importance(model, X, y, cv, scorer='neg_log_loss'|'pwa').
+
+clustered_importance(...) using feature clusters to reduce substitution bias.
+
+5) scoring.py
+pwa(y_true, proba) + neg_average_likelihood (NegAL) for probabilistic scoring. Prefer these over raw accuracy. machine-learning-for-as…
+
+6) risk_cov.py
+denoise_cov(corr) via Marčenko–Pastur fit + shrinkage; detone_cov(corr) to remove market mode; return cleaned Σ for any allocation/sizer.
+
+7) allocation.py
+Single-asset: convert signal → position size with meta-label proba & cleaned vol.
+
+Multi-asset: add HRP/HERC-style allocator using cleaned Σ + clustering distances (e.g., dρ or MI-based). machine-learning-for-as…
+
+8) overfit_audit.py
+deflated_sharpe(sr, sr_var, trials) and FWER utilities; include resampling/MC harness for synthetic paths. machine-learning-for-as…
+
+9) exec_rules.py
+Order templates: make_limit, make_stop, make_stop_limit, make_gtc.
+
+Risk rules: initial stop, ATR/vol-scaled trailing stop, position cap, max daily loss.
