@@ -14,6 +14,7 @@ def fit_model(X, y, sample_weight=None, n_splits=5, embargo_pct=0.05,
         n_estimators=n_estimators, max_depth=max_depth, min_samples_leaf=min_samples_leaf,
         n_jobs=-1, class_weight=class_weight, random_state=42
     )
+
     # Calibrated for better proba
     clf = CalibratedClassifierCV(base, method='isotonic', cv=3)
 

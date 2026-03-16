@@ -1,0 +1,85 @@
+1. RSI + MACD (Mid-Term)
+    Entry Signals
+    Oversold Divergence
+
+    RSI(14) makes a higher low while price makes a lower low, and MACD(12-26-9) histogram is rising.
+
+    Signal-Line Crossover in Oversold Zone
+
+    MACD line crosses above its 9-period signal when RSI(14) is below 30.
+
+    Dual-RSI Confirmation + MACD Zero-Cross
+
+    Fast RSI(7) crosses above RSI(14) and MACD line crosses above zero.
+
+    Zero-Line Rejection
+
+    MACD dips toward zero then bounces up, with RSI(14) recovering above 40.
+
+    Multi-Timeframe Filter
+
+    Daily RSI(14) exits oversold, weekly RSI already >50, and MACD(12-26-9) line crosses its signal.
+
+    Exit Signals
+    Signal-Line Cross Down near Overbought
+
+    MACD line crosses below its 9-period signal when RSI(14) >70.
+
+    Bearish Divergence
+
+    Price makes a higher high, RSI(14) makes a lower high, and MACD histogram shows lower highs.
+
+    Zero-Line Crossover Down
+
+    MACD line falls below zero, often confirmed by RSI crossing down through 50.
+
+    Fast-RSI Pullback + MACD Flop
+
+    RSI(7) crosses below RSI(14) and MACD line crosses below its signal.
+
+    ATR-Based Stop / Time Exit
+
+    Exit if price moves against entry by 1×ATR(14) or after a fixed number of bars (e.g. 15–30 daily).
+
+2. Bollinger Bands + EMA + ATR (Mid-Term)
+    Entry Signals
+    BB Squeeze Breakout
+
+    BB(14, 2.0) narrow compression → price closes above upper band when EMA(20) is rising.
+
+    EMA Pullback to Mid-Band
+
+    Price retraces to BB mid-band (20 SMA) and bounces above EMA(20) with ATR(14) increasing.
+
+    ATR-Confirmed Breakout
+
+    Price breaks above BB upper band and ATR(14) spikes above its 14-bar average; EMA(9) > EMA(21).
+
+    Dual-EMA Crossover + BB Filter
+
+    EMA(9) crosses above EMA(21) within the bands, then a close above the upper BB(20, 2).
+
+    Volatility Spike Entry
+
+    ATR(20) >1.5× its 20-bar average and price sits above EMA(50) and BB(20, 2).
+
+    Exit Signals
+    Opposite-Band Touch
+
+    Price hits the lower BB band (for longs) or upper band (for shorts).
+
+    EMA Cross Down
+
+    EMA(9) crosses below EMA(21) or EMA(20), confirmed by a close back inside BB.
+
+    ATR-Based Trailing Stop
+
+    Trail stop = entry price ± k × ATR(14) (commonly k=1–2).
+
+    Band Re-Squeeze
+
+    BB width contracts below a threshold while price falls below EMA(20).
+
+    Time-Filter Exit
+
+    Close after a set number of bars (e.g. 15–30) or when ATR(14) falls to <50% of its entry value.
